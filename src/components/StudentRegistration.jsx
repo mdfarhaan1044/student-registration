@@ -33,7 +33,6 @@ const StudentRegistration = ({ onLogin }) => {
             alert("Incorrect password!");
         }
     };
-
     return (
         <div>
             <h2>Student Login / Register</h2>
