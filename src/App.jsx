@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import StudentRegistration from "./components/StudentRegistration";
 import CourseTypeManager from "./components/CourseTypeManager";
+import CourseManager from "./components/CourseManager";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -32,6 +33,7 @@ function App() {
         <div style={{ padding: 20 }}>
           <h2>Welcome, {loggedInUser}</h2>
           <CourseTypeManager />
+          <CourseManager />
           <button onClick={handleLogout}>Logout</button>
         </div>
       )}
