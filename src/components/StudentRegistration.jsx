@@ -11,6 +11,7 @@ const StudentRegistration = () => {
     const [name, setName] = useState("");
     const [rollNumber, setRollNumber] = useState("");
     const [registrations, setRegistrations] = useState({});
+    const [showSuccess, setShowSuccess] = useState(false);
 
     useEffect(() => {
         const storedOfferings = JSON.parse(localStorage.getItem(OFFERING_KEY) || "[]");
@@ -48,32 +49,43 @@ const StudentRegistration = () => {
         setRegistrations(updated);
         setName("");
         setRollNumber("");
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 3000);
     };
 
     return (
         <div className="registration-container">
             <h2>Student Registration</h2>
 
-            <select value={selectedOffering} onChange={(e) => setSelectedOffering(e.target.value)}>
-                <option value="">Select Course Offering</option>
-                {offerings.map((off, idx) => (
-                    <option key={idx} value={off}>{off}</option>
-                ))}
-            </select>
+            <div className="registration-form">
+                <h3>Register New Student</h3>
+                <select value={selectedOffering} onChange={(e) => setSelectedOffering(e.target.value)}>
+                    <option value="">Select Course Offering</option>
+                    {offerings.map((off, idx) => (
+                        <option key={idx} value={off}>{off}</option>
+                    ))}
+                </select>
 
-            <input
-                type="text"
-                placeholder="Student Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Roll Number"
-                value={rollNumber}
-                onChange={(e) => setRollNumber(e.target.value)}
-            />
-            <button onClick={handleRegister}>Register</button>
+                <input
+                    type="text"
+                    placeholder="Student Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Roll Number"
+                    value={rollNumber}
+                    onChange={(e) => setRollNumber(e.target.value)}
+                />
+                <button onClick={handleRegister}>Register Student</button>
+            </div>
+
+            {showSuccess && (
+                <div className="registration-success">
+                    ✅ Student registered successfully!
+                </div>
+            )}
 
             {selectedOffering && (
                 <div>

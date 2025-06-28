@@ -57,30 +57,33 @@ const CourseOfferingManager = () => {
         <div className="offering-manager-container">
             <h2>Course Offering Management</h2>
 
-            <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
-                <option value="">Select Course Type</option>
-                {courseTypes.map((type, idx) => (
-                    <option key={idx} value={type}>{type}</option>
-                ))}
-            </select>
+            <div className="offering-form">
+                <h3>Create New Offering</h3>
+                <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
+                    <option value="">Select Course Type</option>
+                    {courseTypes.map((type, idx) => (
+                        <option key={idx} value={type}>{type}</option>
+                    ))}
+                </select>
 
-            <select value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
-                <option value="">Select Course</option>
-                {courses.map((course, idx) => (
-                    <option key={idx} value={course}>{course}</option>
-                ))}
-            </select>
+                <select value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
+                    <option value="">Select Course</option>
+                    {courses.map((course, idx) => (
+                        <option key={idx} value={course}>{course}</option>
+                    ))}
+                </select>
 
-            {editIndex === null ? (
-                <button onClick={addOffering}>Add Offering</button>
-            ) : (
-                <button onClick={updateOffering}>Update Offering</button>
-            )}
+                {editIndex === null ? (
+                    <button onClick={addOffering}>Add Offering</button>
+                ) : (
+                    <button onClick={updateOffering}>Update Offering</button>
+                )}
+            </div>
 
             <ul>
                 {offerings.map((offering, idx) => (
                     <li key={idx}>
-                        {offering}
+                        <span>{offering}</span>
                         <div>
                             <button
                                 onClick={() => {

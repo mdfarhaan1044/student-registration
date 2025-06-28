@@ -1,60 +1,223 @@
-/* src/CourseOfferingManager.css */
+/* src/CourseOfferingManager.css - Modern Card Design */
 
 .offering-manager-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-    font-family: 'Segoe UI', sans-serif;
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-8);
+    border: 1px solid var(--gray-100);
+    transition: all 0.3s ease;
+    animation: slideUp 0.4s ease-out;
+}
+
+.offering-manager-container:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px);
 }
 
 .offering-manager-container h2 {
     text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+    margin-bottom: var(--space-8);
+    color: var(--gray-800);
+    font-size: 1.75rem;
+    font-weight: 700;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
 }
 
-.offering-manager-container select,
-.offering-manager-container input {
+.offering-manager-container h2::before {
+    content: '📋';
+    font-size: 1.5rem;
+}
+
+.offering-manager-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.offering-manager-container select {
+    padding: var(--space-4);
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    margin-bottom: var(--space-4);
+    font-size: 1rem;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--gray-200);
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: var(--white);
+    box-sizing: border-box;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+.offering-manager-container select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    transform: translateY(-1px);
+}
+
+.offering-manager-container select:invalid {
+    color: var(--gray-400);
 }
 
 .offering-manager-container button {
-    margin: 10px 6px 10px 0;
-    padding: 10px 16px;
-    font-size: 14px;
+    margin: var(--space-2) var(--space-2) var(--space-2) 0;
+    padding: var(--space-4) var(--space-8);
+    font-size: 1rem;
+    font-weight: 600;
     border: none;
-    border-radius: 6px;
-    background-color: #17a2b8;
-    color: white;
+    border-radius: var(--radius-lg);
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--success-color), var(--success-hover));
+    color: var(--white);
+    width: 100%;
+    margin-top: var(--space-4);
 }
 
 .offering-manager-container button:hover {
-    background-color: #117a8b;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.offering-manager-container button:active {
+    transform: translateY(0);
 }
 
 .offering-manager-container ul {
     list-style: none;
     padding: 0;
+    margin-top: var(--space-8);
 }
 
 .offering-manager-container li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+    padding: var(--space-4);
+    margin-bottom: var(--space-3);
+    border-radius: var(--radius-lg);
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    animation: slideUp 0.3s ease-out;
+}
+
+.offering-manager-container li:hover {
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+}
+
+.offering-manager-container li span {
+    font-weight: 500;
+    color: var(--gray-700);
+    flex: 1;
+}
+
+.offering-manager-container li div {
+    display: flex;
+    gap: var(--space-2);
 }
 
 .offering-manager-container li button {
-    margin-left: 6px;
+    margin: 0;
+    padding: var(--space-2) var(--space-4);
+    font-size: 0.8rem;
+    width: auto;
+}
+
+.offering-manager-container li button:first-of-type {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: var(--white);
+}
+
+.offering-manager-container li button:last-of-type {
+    background: linear-gradient(135deg, var(--danger-color), var(--danger-hover));
+    color: var(--white);
+}
+
+/* Form section styling */
+.offering-form {
+    background: var(--gray-50);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-6);
+    border: 1px solid var(--gray-200);
+}
+
+.offering-form h3 {
+    margin-bottom: var(--space-4);
+    color: var(--gray-700);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Empty state */
+.offering-manager-container ul:empty::after {
+    content: 'No course offerings added yet. Create your first offering above!';
+    display: block;
+    text-align: center;
+    color: var(--gray-500);
+    font-style: italic;
+    padding: var(--space-8);
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    border: 2px dashed var(--gray-300);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .offering-manager-container {
+        padding: var(--space-6);
+    }
+    
+    .offering-manager-container h2 {
+        font-size: 1.5rem;
+    }
+    
+    .offering-manager-container li {
+        flex-direction: column;
+        gap: var(--space-3);
+        align-items: stretch;
+    }
+    
+    .offering-manager-container li div {
+        justify-content: center;
+    }
+    
+    .offering-form {
+        padding: var(--space-4);
+    }
+}
+
+/* Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
