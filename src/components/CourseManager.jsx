@@ -39,11 +39,11 @@ const CourseManager = () => {
 
   return (
     <div style={{ padding: 20 }}>
-      <h2>Course Management</h2>
+      <h2>Course Manager</h2>
       <input
         value={newCourse}
         onChange={(e) => setNewCourse(e.target.value)}
-        placeholder="Add new course"
+        placeholder="Add new course (e.g., Group - English, Individual - Hindi etc.)"
       />
       <button onClick={addCourse}>Add</button>
 

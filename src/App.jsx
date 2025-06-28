@@ -1,8 +1,10 @@
 // src/App.jsx
 import React, { useState, useEffect } from "react";
-import StudentRegistration from "./components/StudentRegistration";
+import Login from "./components/Login";
 import CourseTypeManager from "./components/CourseTypeManager";
 import CourseManager from "./components/CourseManager";
+import CourseOfferingManager from "./components/CourseOfferingManager";
+import StudentRegistration from "./components/StudentRegistration";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -28,12 +30,14 @@ function App() {
   return (
     <div>
       {!loggedInUser ? (
-        < StudentRegistration onLogin={handleLogin} />
+        <Login onLogin={handleLogin} />
       ) : (
         <div style={{ padding: 20 }}>
           <h2>Welcome, {loggedInUser}</h2>
           <CourseTypeManager />
           <CourseManager />
+          <CourseOfferingManager />
+          <StudentRegistration />
           <button onClick={handleLogout}>Logout</button>
         </div>
       )}
