@@ -1,6 +1,6 @@
 // src/CourseTypeManager.jsx
 import React, { useState, useEffect } from "react";
-import "./CourseTypeManager.css"; // 👈 import the CSS file
+import "./Styles/courseTypeManager.css";
 
 const STORAGE_KEY = "course_types";
 

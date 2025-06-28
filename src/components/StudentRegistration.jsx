@@ -1,6 +1,6 @@
 // src/StudentRegistration.jsx
 import React, { useState, useEffect } from "react";
-import "./StudentRegistration.css"; // 👈 Import the CSS file
+import "./Styles/studentRegistration.css";
 
 const OFFERING_KEY = "course_offerings";
 const REGISTRATION_KEY = "registrations";

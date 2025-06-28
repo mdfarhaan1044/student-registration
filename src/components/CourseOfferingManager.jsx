@@ -1,6 +1,6 @@
 // src/CourseOfferingManager.jsx
 import React, { useState, useEffect } from "react";
-import "./CourseOfferingManager.css"; // 👈 Import the CSS file
+import "./Styles/courseOfferingManager.css";
 
 const OFFERING_KEY = "course_offerings";
 const COURSE_KEY = "courses";
