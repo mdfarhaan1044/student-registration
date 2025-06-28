@@ -1,6 +1,6 @@
 // src/CourseTypeManager.jsx
-
 import React, { useState, useEffect } from "react";
+import "./CourseTypeManager.css"; // 👈 import the CSS file
 
 const STORAGE_KEY = "course_types";
 
@@ -14,7 +14,6 @@ const CourseTypeManager = () => {
     const [editIndex, setEditIndex] = useState(null);
     const [editValue, setEditValue] = useState("");
 
-    // Save on change
     useEffect(() => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(courseTypes));
     }, [courseTypes]);
@@ -40,12 +39,12 @@ const CourseTypeManager = () => {
     };
 
     return (
-        <div style={{ padding: 20 }}>
-            <h2>Course Name</h2>
+        <div className="course-type-container">
+            <h2>Course Type Management</h2>
             <input
                 value={newType}
                 onChange={(e) => setNewType(e.target.value)}
-                placeholder="Add new course name"
+                placeholder="Add new course type"
             />
             <button onClick={addCourseType}>Add</button>
 
@@ -63,12 +62,18 @@ const CourseTypeManager = () => {
                             </>
                         ) : (
                             <>
-                                {type}
-                                <button onClick={() => {
-                                    setEditIndex(index);
-                                    setEditValue(type);
-                                }}>Edit</button>
-                                <button onClick={() => deleteCourseType(index)}>Delete</button>
+                                <span>{type}</span>
+                                <div>
+                                    <button
+                                        onClick={() => {
+                                            setEditIndex(index);
+                                            setEditValue(type);
+                                        }}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button onClick={() => deleteCourseType(index)}>Delete</button>
+                                </div>
                             </>
                         )}
                     </li>

@@ -1,0 +1,60 @@
+/* src/CourseOfferingManager.css */
+
+.offering-manager-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.offering-manager-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.offering-manager-container select,
+.offering-manager-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.offering-manager-container button {
+    margin: 10px 6px 10px 0;
+    padding: 10px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: #17a2b8;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.offering-manager-container button:hover {
+    background-color: #117a8b;
+}
+
+.offering-manager-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.offering-manager-container li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.offering-manager-container li button {
+    margin-left: 6px;
+}

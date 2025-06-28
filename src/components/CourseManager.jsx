@@ -1,5 +1,6 @@
 // src/CourseManager.jsx
 import React, { useState, useEffect } from "react";
+import "./CourseManager.css"; // 👈 Import the CSS file
 
 const STORAGE_KEY = "courses";
 
@@ -38,12 +39,12 @@ const CourseManager = () => {
   };
 
   return (
-    <div style={{ padding: 20 }}>
+    <div className="course-manager-container">
       <h2>Course Manager</h2>
       <input
         value={newCourse}
         onChange={(e) => setNewCourse(e.target.value)}
-        placeholder="Add new course (e.g., Group - English, Individual - Hindi etc.)"
+        placeholder="Add new course (e.g., English, Urdu)"
       />
       <button onClick={addCourse}>Add</button>
 
@@ -61,12 +62,18 @@ const CourseManager = () => {
               </>
             ) : (
               <>
-                {course}
-                <button onClick={() => {
-                  setEditIndex(index);
-                  setEditValue(course);
-                }}>Edit</button>
-                <button onClick={() => deleteCourse(index)}>Delete</button>
+                <span>{course}</span>
+                <div>
+                  <button
+                    onClick={() => {
+                      setEditIndex(index);
+                      setEditValue(course);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button onClick={() => deleteCourse(index)}>Delete</button>
+                </div>
               </>
             )}
           </li>

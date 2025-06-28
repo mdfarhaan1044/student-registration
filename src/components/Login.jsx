@@ -1,5 +1,6 @@
 // src/Login.jsx
 import React, { useState } from "react";
+import "./login.css";
 
 const Login = ({ onLogin }) => {
     const [rollNumber, setRollNumber] = useState("");
@@ -33,8 +34,9 @@ const Login = ({ onLogin }) => {
             alert("Incorrect password!");
         }
     };
+
     return (
-        <div>
+        <div className="login-container">
             <h2>Student Login / Register</h2>
             <input
                 type="text"
@@ -42,16 +44,16 @@ const Login = ({ onLogin }) => {
                 value={rollNumber}
                 onChange={(e) => setRollNumber(e.target.value)}
             />
-            <br />
             <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <br />
-            <button onClick={handleLogin}>Login</button>
-            <button onClick={handleRegister}>Register</button>
+            <div className="login-button-group">
+                <button onClick={handleLogin}>Login</button>
+                <button onClick={handleRegister}>Register</button>
+            </div>
         </div>
     );
 };

@@ -1,5 +1,6 @@
 // src/CourseOfferingManager.jsx
 import React, { useState, useEffect } from "react";
+import "./CourseOfferingManager.css"; // 👈 Import the CSS file
 
 const OFFERING_KEY = "course_offerings";
 const COURSE_KEY = "courses";
@@ -16,10 +17,8 @@ const CourseOfferingManager = () => {
 
     const [selectedCourse, setSelectedCourse] = useState("");
     const [selectedType, setSelectedType] = useState("");
-
     const [editIndex, setEditIndex] = useState(null);
 
-    // Load courses & course types
     useEffect(() => {
         const storedCourses = JSON.parse(localStorage.getItem(COURSE_KEY) || "[]");
         const storedTypes = JSON.parse(localStorage.getItem(TYPE_KEY) || "[]");
@@ -27,7 +26,6 @@ const CourseOfferingManager = () => {
         setCourseTypes(storedTypes);
     }, []);
 
-    // Save offerings
     useEffect(() => {
         localStorage.setItem(OFFERING_KEY, JSON.stringify(offerings));
     }, [offerings]);
@@ -56,18 +54,18 @@ const CourseOfferingManager = () => {
     };
 
     return (
-        <div style={{ padding: 20 }}>
+        <div className="offering-manager-container">
             <h2>Course Offering Management</h2>
 
             <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
-                <option value="">Select Course Name</option>
+                <option value="">Select Course Type</option>
                 {courseTypes.map((type, idx) => (
                     <option key={idx} value={type}>{type}</option>
                 ))}
             </select>
 
             <select value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
-                <option value="">Select Course Type</option>
+                <option value="">Select Course</option>
                 {courses.map((course, idx) => (
                     <option key={idx} value={course}>{course}</option>
                 ))}
@@ -83,17 +81,19 @@ const CourseOfferingManager = () => {
                 {offerings.map((offering, idx) => (
                     <li key={idx}>
                         {offering}
-                        <button
-                            onClick={() => {
-                                const [type, course] = offering.split(" - ");
-                                setSelectedCourse(course);
-                                setSelectedType(type);
-                                setEditIndex(idx);
-                            }}
-                        >
-                            Edit
-                        </button>
-                        <button onClick={() => deleteOffering(idx)}>Delete</button>
+                        <div>
+                            <button
+                                onClick={() => {
+                                    const [type, course] = offering.split(" - ");
+                                    setSelectedCourse(course);
+                                    setSelectedType(type);
+                                    setEditIndex(idx);
+                                }}
+                            >
+                                Edit
+                            </button>
+                            <button onClick={() => deleteOffering(idx)}>Delete</button>
+                        </div>
                     </li>
                 ))}
             </ul>

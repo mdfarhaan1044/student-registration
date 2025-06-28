@@ -1,8 +1,9 @@
 // src/StudentRegistration.jsx
 import React, { useState, useEffect } from "react";
+import "./StudentRegistration.css"; // 👈 Import the CSS file
 
 const OFFERING_KEY = "course_offerings";
-const REGISTRATION_KEY = "registrations"; // { "Group - Hindi": [{name, roll}] }
+const REGISTRATION_KEY = "registrations";
 
 const StudentRegistration = () => {
     const [offerings, setOfferings] = useState([]);
@@ -11,7 +12,6 @@ const StudentRegistration = () => {
     const [rollNumber, setRollNumber] = useState("");
     const [registrations, setRegistrations] = useState({});
 
-    // Load offerings and registrations
     useEffect(() => {
         const storedOfferings = JSON.parse(localStorage.getItem(OFFERING_KEY) || "[]");
         const storedRegistrations = JSON.parse(localStorage.getItem(REGISTRATION_KEY) || "{}");
@@ -20,7 +20,6 @@ const StudentRegistration = () => {
         setRegistrations(storedRegistrations);
     }, []);
 
-    // Save registrations when changed
     useEffect(() => {
         localStorage.setItem(REGISTRATION_KEY, JSON.stringify(registrations));
     }, [registrations]);
@@ -37,7 +36,6 @@ const StudentRegistration = () => {
             updated[selectedOffering] = [];
         }
 
-        // Prevent duplicate roll number for same offering
         const alreadyRegistered = updated[selectedOffering].some(
             (s) => s.rollNumber === rollNumber
         );
@@ -53,7 +51,7 @@ const StudentRegistration = () => {
     };
 
     return (
-        <div style={{ padding: 20 }}>
+        <div className="registration-container">
             <h2>Student Registration</h2>
 
             <select value={selectedOffering} onChange={(e) => setSelectedOffering(e.target.value)}>
@@ -63,24 +61,20 @@ const StudentRegistration = () => {
                 ))}
             </select>
 
-            <br />
             <input
                 type="text"
                 placeholder="Student Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
             />
-            <br />
             <input
                 type="text"
                 placeholder="Roll Number"
                 value={rollNumber}
                 onChange={(e) => setRollNumber(e.target.value)}
             />
-            <br />
             <button onClick={handleRegister}>Register</button>
 
-            {/* Show registered students for selected offering */}
             {selectedOffering && (
                 <div>
                     <h4>Registered Students for: {selectedOffering}</h4>
