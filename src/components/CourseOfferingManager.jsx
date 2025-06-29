@@ -1,56 +1,46 @@
 // src/CourseOfferingManager.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useCourseContext } from "../context/CourseContext";
 import "./Styles/courseOfferingManager.css";
 
-const OFFERING_KEY = "course_offerings";
-const COURSE_KEY = "courses";
-const TYPE_KEY = "course_types";
-
 const CourseOfferingManager = () => {
-    const [offerings, setOfferings] = useState(() => {
-        const saved = localStorage.getItem(OFFERING_KEY);
-        return saved ? JSON.parse(saved) : [];
-    });
-
-    const [courses, setCourses] = useState([]);
-    const [courseTypes, setCourseTypes] = useState([]);
+    const { 
+        courses, 
+        courseTypes, 
+        courseOfferings, 
+        addCourseOffering, 
+        updateCourseOffering, 
+        deleteCourseOffering 
+    } = useCourseContext();
 
     const [selectedCourse, setSelectedCourse] = useState("");
     const [selectedType, setSelectedType] = useState("");
     const [editIndex, setEditIndex] = useState(null);
 
-    useEffect(() => {
-        const storedCourses = JSON.parse(localStorage.getItem(COURSE_KEY) || "[]");
-        const storedTypes = JSON.parse(localStorage.getItem(TYPE_KEY) || "[]");
-        setCourses(storedCourses);
-        setCourseTypes(storedTypes);
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem(OFFERING_KEY, JSON.stringify(offerings));
-    }, [offerings]);
-
-    const addOffering = () => {
-        if (!selectedCourse || !selectedType) return alert("Select both values");
-        const newOffering = `${selectedType} - ${selectedCourse}`;
-        setOfferings([...offerings, newOffering]);
-        setSelectedCourse("");
-        setSelectedType("");
+    const handleAddOffering = () => {
+        try {
+            addCourseOffering(selectedType, selectedCourse);
+            setSelectedCourse("");
+            setSelectedType("");
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
-    const updateOffering = () => {
-        if (editIndex === null || !selectedCourse || !selectedType) return;
-        const updated = [...offerings];
-        updated[editIndex] = `${selectedType} - ${selectedCourse}`;
-        setOfferings(updated);
-        setEditIndex(null);
-        setSelectedCourse("");
-        setSelectedType("");
+    const handleUpdateOffering = () => {
+        try {
+            updateCourseOffering(editIndex, selectedType, selectedCourse);
+            setEditIndex(null);
+            setSelectedCourse("");
+            setSelectedType("");
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
-    const deleteOffering = (index) => {
+    const handleDeleteOffering = (index) => {
         if (!window.confirm("Delete this offering?")) return;
-        setOfferings(offerings.filter((_, i) => i !== index));
+        deleteCourseOffering(index);
     };
 
     return (
@@ -74,14 +64,14 @@ const CourseOfferingManager = () => {
                 </select>
 
                 {editIndex === null ? (
-                    <button onClick={addOffering}>Add Offering</button>
+                    <button onClick={handleAddOffering}>Add Offering</button>
                 ) : (
-                    <button onClick={updateOffering}>Update Offering</button>
+                    <button onClick={handleUpdateOffering}>Update Offering</button>
                 )}
             </div>
 
             <ul>
-                {offerings.map((offering, idx) => (
+                {courseOfferings.map((offering, idx) => (
                     <li key={idx}>
                         <span>{offering}</span>
                         <div>
@@ -95,7 +85,7 @@ const CourseOfferingManager = () => {
                             >
                                 Edit
                             </button>
-                            <button onClick={() => deleteOffering(idx)}>Delete</button>
+                            <button onClick={() => handleDeleteOffering(idx)}>Delete</button>
                         </div>
                     </li>
                 ))}

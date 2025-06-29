@@ -1,56 +1,37 @@
 // src/StudentRegistration.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useCourseContext } from "../context/CourseContext";
 import "./Styles/studentRegistration.css";
-
-const OFFERING_KEY = "course_offerings";
-const REGISTRATION_KEY = "registrations";
+import { UserRound } from "lucide-react";
 
 const StudentRegistration = () => {
-    const [offerings, setOfferings] = useState([]);
+    const {
+        courseOfferings,
+        studentRegistrations,
+        addStudentRegistration,
+        deleteStudentRegistration
+    } = useCourseContext();
+
     const [selectedOffering, setSelectedOffering] = useState("");
     const [name, setName] = useState("");
     const [rollNumber, setRollNumber] = useState("");
-    const [registrations, setRegistrations] = useState({});
     const [showSuccess, setShowSuccess] = useState(false);
 
-    useEffect(() => {
-        const storedOfferings = JSON.parse(localStorage.getItem(OFFERING_KEY) || "[]");
-        const storedRegistrations = JSON.parse(localStorage.getItem(REGISTRATION_KEY) || "{}");
-
-        setOfferings(storedOfferings);
-        setRegistrations(storedRegistrations);
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem(REGISTRATION_KEY, JSON.stringify(registrations));
-    }, [registrations]);
-
     const handleRegister = () => {
-        if (!selectedOffering || !name || !rollNumber) {
-            return alert("All fields are required!");
+        try {
+            addStudentRegistration(selectedOffering, name, rollNumber);
+            setName("");
+            setRollNumber("");
+            setShowSuccess(true);
+            setTimeout(() => setShowSuccess(false), 3000);
+        } catch (error) {
+            alert(error.message);
         }
+    };
 
-        const newEntry = { name, rollNumber };
-        const updated = { ...registrations };
-
-        if (!updated[selectedOffering]) {
-            updated[selectedOffering] = [];
-        }
-
-        const alreadyRegistered = updated[selectedOffering].some(
-            (s) => s.rollNumber === rollNumber
-        );
-
-        if (alreadyRegistered) {
-            return alert("This roll number is already registered for this course offering.");
-        }
-
-        updated[selectedOffering].push(newEntry);
-        setRegistrations(updated);
-        setName("");
-        setRollNumber("");
-        setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 3000);
+    const handleDeleteRegistration = (offering, rollNumber) => {
+        if (!window.confirm("Are you sure you want to remove this student registration?")) return;
+        deleteStudentRegistration(offering, rollNumber);
     };
 
     return (
@@ -61,7 +42,7 @@ const StudentRegistration = () => {
                 <h3>Register New Student</h3>
                 <select value={selectedOffering} onChange={(e) => setSelectedOffering(e.target.value)}>
                     <option value="">Select Course Offering</option>
-                    {offerings.map((off, idx) => (
+                    {courseOfferings.map((off, idx) => (
                         <option key={idx} value={off}>{off}</option>
                     ))}
                 </select>
@@ -91,10 +72,30 @@ const StudentRegistration = () => {
                 <div>
                     <h4>Registered Students for: {selectedOffering}</h4>
                     <ul>
-                        {(registrations[selectedOffering] || []).map((student, i) => (
-                            <li key={i}>
-                                {student.name} (Roll No: {student.rollNumber})
+                        {(studentRegistrations[selectedOffering] || []).map((student, i) => (
+
+                            <li className="registration-list" key={i}>
+                                <span className="registration-list-item"> <UserRound size={25} fill="black" color="white" /> {student.name} (Roll No: {student.rollNumber})</span>
+                                <button className="remove-button"
+                                    onClick={() => handleDeleteRegistration(selectedOffering, student.rollNumber)}
+                                    style={{
+                                        marginBottom: '13px',
+                                        width: '100px',
+                                        height: '30px',
+                                        marginLeft: '10px',
+                                        padding: '2px 8px',
+                                        fontSize: '12px',
+                                        backgroundColor: '#ff4444',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '5px',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    Remove
+                                </button>
                             </li>
+
                         ))}
                     </ul>
                 </div>

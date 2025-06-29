@@ -1,41 +1,36 @@
 // src/CourseManager.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useCourseContext } from "../context/CourseContext";
 import "./Styles/courseManager.css";
 
-const STORAGE_KEY = "courses";
-
 const CourseManager = () => {
-  const [courses, setCourses] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : [];
-  });
-
+  const { courses, addCourse, updateCourse, deleteCourse } = useCourseContext();
   const [newCourse, setNewCourse] = useState("");
   const [editIndex, setEditIndex] = useState(null);
   const [editValue, setEditValue] = useState("");
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(courses));
-  }, [courses]);
-
-  const addCourse = () => {
-    if (!newCourse.trim()) return alert("Course name cannot be empty!");
-    setCourses([...courses, newCourse.trim()]);
-    setNewCourse("");
+  const handleAddCourse = () => {
+    try {
+      addCourse(newCourse);
+      setNewCourse("");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
-  const updateCourse = () => {
-    if (!editValue.trim()) return alert("Updated name cannot be empty!");
-    const updated = [...courses];
-    updated[editIndex] = editValue.trim();
-    setCourses(updated);
-    setEditIndex(null);
-    setEditValue("");
+  const handleUpdateCourse = () => {
+    try {
+      updateCourse(editIndex, editValue);
+      setEditIndex(null);
+      setEditValue("");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
-  const deleteCourse = (index) => {
+  const handleDeleteCourse = (index) => {
     if (!window.confirm("Are you sure you want to delete this course?")) return;
-    setCourses(courses.filter((_, i) => i !== index));
+    deleteCourse(index);
   };
 
   return (
@@ -46,7 +41,7 @@ const CourseManager = () => {
         onChange={(e) => setNewCourse(e.target.value)}
         placeholder="Add new course (e.g., English, Urdu)"
       />
-      <button onClick={addCourse}>Add</button>
+      <button onClick={handleAddCourse}>Add</button>
 
       <ul>
         {courses.map((course, index) => (
@@ -57,7 +52,7 @@ const CourseManager = () => {
                   value={editValue}
                   onChange={(e) => setEditValue(e.target.value)}
                 />
-                <button onClick={updateCourse}>Save</button>
+                <button onClick={handleUpdateCourse}>Save</button>
                 <button onClick={() => setEditIndex(null)}>Cancel</button>
               </>
             ) : (
@@ -72,7 +67,7 @@ const CourseManager = () => {
                   >
                     Edit
                   </button>
-                  <button onClick={() => deleteCourse(index)}>Delete</button>
+                  <button onClick={() => handleDeleteCourse(index)}>Delete</button>
                 </div>
               </>
             )}

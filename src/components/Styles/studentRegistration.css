@@ -169,10 +169,7 @@
     transform: translateX(4px);
 }
 
-.registration-container li::before {
-    content: '👤';
-    font-size: 1.2rem;
-}
+
 
 /* Form section styling */
 .registration-form {
@@ -252,3 +249,17 @@
         transform: translateY(0);
     }
 }
+
+.registration-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.registration-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
