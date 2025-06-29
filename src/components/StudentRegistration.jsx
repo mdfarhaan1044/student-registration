@@ -5,6 +5,7 @@ import "./Styles/studentRegistration.css";
 import { CircleUserRound } from "lucide-react";
 import { UserRound } from "lucide-react";
 import { CircleCheckBig } from "lucide-react";
+import { TableOfContents } from "lucide-react";
 
 const StudentRegistration = () => {
     const {
@@ -61,7 +62,7 @@ const StudentRegistration = () => {
                     value={rollNumber}
                     onChange={(e) => setRollNumber(e.target.value)}
                 />
-                <button onClick={handleRegister}>Register Student</button>
+                <button className="registration-button" onClick={handleRegister}>Register Student</button>
             </div>
 
             {showSuccess && (
@@ -72,27 +73,14 @@ const StudentRegistration = () => {
 
             {selectedOffering && (
                 <div>
-                    <h4>Registered Students for: {selectedOffering}</h4>
+                    <h4> <TableOfContents /> Registered Students for: {selectedOffering}</h4>
                     <ul>
                         {(studentRegistrations[selectedOffering] || []).map((student, i) => (
 
                             <li className="registration-list" key={i}>
                                 <span className="registration-list-item"> <UserRound size={25} fill="black" color="white" /> {student.name} (Roll No: {student.rollNumber})</span>
                                 <button className="remove-button"
-                                    onClick={() => handleDeleteRegistration(selectedOffering, student.rollNumber)}
-                                    style={{
-                                        width: '100px',
-                                        height: '30px',
-                                        marginLeft: '10px',
-                                        padding: '2px 8px',
-                                        fontSize: '12px',
-                                        backgroundColor: '#ff4444',
-                                        color: 'white',
-                                        border: 'none',
-                                        borderRadius: '5px',
-                                        cursor: 'pointer'
-                                    }}
-                                >
+                                    onClick={() => handleDeleteRegistration(selectedOffering, student.rollNumber)}>
                                     Remove
                                 </button>
                             </li>
