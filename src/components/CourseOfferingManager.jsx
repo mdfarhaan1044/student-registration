@@ -2,15 +2,16 @@
 import React, { useState } from "react";
 import { useCourseContext } from "../context/CourseContext";
 import "./Styles/courseOfferingManager.css";
+import { NotebookTabs } from "lucide-react";
 
 const CourseOfferingManager = () => {
-    const { 
-        courses, 
-        courseTypes, 
-        courseOfferings, 
-        addCourseOffering, 
-        updateCourseOffering, 
-        deleteCourseOffering 
+    const {
+        courses,
+        courseTypes,
+        courseOfferings,
+        addCourseOffering,
+        updateCourseOffering,
+        deleteCourseOffering
     } = useCourseContext();
 
     const [selectedCourse, setSelectedCourse] = useState("");
@@ -45,7 +46,7 @@ const CourseOfferingManager = () => {
 
     return (
         <div className="offering-manager-container">
-            <h2>Course Offering Management</h2>
+            <h2> <NotebookTabs />Course Offering Management</h2>
 
             <div className="offering-form">
                 <h3>Create New Offering</h3>

@@ -28,10 +28,7 @@
     gap: var(--space-3);
 }
 
-.registration-container h2::before {
-    content: '👨‍🎓';
-    font-size: 1.5rem;
-}
+
 
 .registration-container h2::after {
     content: '';
@@ -203,6 +200,10 @@
 
 /* Success message styling */
 .registration-success {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    justify-content: center;
     background: linear-gradient(135deg, var(--success-color), var(--success-hover));
     color: var(--white);
     padding: var(--space-4);
@@ -218,19 +219,19 @@
     .registration-container {
         padding: var(--space-6);
     }
-    
+
     .registration-container h2 {
         font-size: 1.5rem;
     }
-    
+
     .registration-container h4 {
         font-size: 1.1rem;
     }
-    
+
     .registration-form {
         padding: var(--space-4);
     }
-    
+
     .registration-container li {
         flex-direction: column;
         align-items: flex-start;
@@ -244,6 +245,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -251,15 +253,14 @@
 }
 
 .registration-list {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .registration-list-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-

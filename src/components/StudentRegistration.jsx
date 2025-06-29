@@ -2,7 +2,9 @@
 import React, { useState } from "react";
 import { useCourseContext } from "../context/CourseContext";
 import "./Styles/studentRegistration.css";
+import { CircleUserRound } from "lucide-react";
 import { UserRound } from "lucide-react";
+import { CircleCheckBig } from "lucide-react";
 
 const StudentRegistration = () => {
     const {
@@ -36,7 +38,7 @@ const StudentRegistration = () => {
 
     return (
         <div className="registration-container">
-            <h2>Student Registration</h2>
+            <h2> <CircleUserRound />Student Registration</h2>
 
             <div className="registration-form">
                 <h3>Register New Student</h3>
@@ -64,7 +66,7 @@ const StudentRegistration = () => {
 
             {showSuccess && (
                 <div className="registration-success">
-                    ✅ Student registered successfully!
+                    <CircleCheckBig size={15} /> Student registered successfully!
                 </div>
             )}
 
@@ -79,7 +81,6 @@ const StudentRegistration = () => {
                                 <button className="remove-button"
                                     onClick={() => handleDeleteRegistration(selectedOffering, student.rollNumber)}
                                     style={{
-                                        marginBottom: '13px',
                                         width: '100px',
                                         height: '30px',
                                         marginLeft: '10px',

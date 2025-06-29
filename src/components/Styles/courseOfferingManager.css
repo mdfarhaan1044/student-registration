@@ -28,10 +28,7 @@
     gap: var(--space-3);
 }
 
-.offering-manager-container h2::before {
-    content: '📋';
-    font-size: 1.5rem;
-}
+
 
 .offering-manager-container h2::after {
     content: '';
@@ -190,21 +187,21 @@
     .offering-manager-container {
         padding: var(--space-6);
     }
-    
+
     .offering-manager-container h2 {
         font-size: 1.5rem;
     }
-    
+
     .offering-manager-container li {
         flex-direction: column;
         gap: var(--space-3);
         align-items: stretch;
     }
-    
+
     .offering-manager-container li div {
         justify-content: center;
     }
-    
+
     .offering-form {
         padding: var(--space-4);
     }
@@ -216,6 +213,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

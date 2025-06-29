@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useCourseContext } from "../context/CourseContext";
 import "./Styles/courseTypeManager.css";
+import { BookOpen } from "lucide-react";
 
 const CourseTypeManager = () => {
     const { courseTypes, addCourseType, updateCourseType, deleteCourseType } = useCourseContext();
@@ -35,7 +36,7 @@ const CourseTypeManager = () => {
 
     return (
         <div className="course-type-container">
-            <h2>Course Type Management</h2>
+            <h2> <BookOpen />Course Type Management</h2>
             <input
                 value={newType}
                 onChange={(e) => setNewType(e.target.value)}

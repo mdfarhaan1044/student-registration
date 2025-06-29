@@ -6,8 +6,9 @@ import CourseManager from "./components/CourseManager";
 import CourseOfferingManager from "./components/CourseOfferingManager";
 import StudentRegistration from "./components/StudentRegistration";
 import { CourseProvider } from "./context/CourseContext";
-import "./App.css"; 
-
+import "./App.css";
+import { LogOut } from "lucide-react";
+import { PiHandWavingThin } from "react-icons/pi";
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
 
@@ -36,13 +37,9 @@ function App() {
         ) : (
           <div className="dashboard fade-in">
             <div className="dashboard-header">
-              <h2>Welcome, {loggedInUser} 👋</h2>
+              <h2 className="dashboard-header-title" >Welcome, {loggedInUser} <PiHandWavingThin size={30} color="black" /></h2>
               <button className="logout-btn" onClick={handleLogout}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px' }}>
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                  <polyline points="16,17 21,12 16,7"></polyline>
-                  <line x1="21" y1="12" x2="9" y2="12"></line>
-                </svg>
+                <LogOut size={20} color="white" />
                 Logout
               </button>
             </div>

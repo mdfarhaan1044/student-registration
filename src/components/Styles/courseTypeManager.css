@@ -28,10 +28,7 @@
     gap: var(--space-3);
 }
 
-.course-type-container h2::before {
-    content: '📚';
-    font-size: 1.5rem;
-}
+
 
 .course-type-container h2::after {
     content: '';
@@ -173,22 +170,22 @@
     .course-type-container {
         padding: var(--space-6);
     }
-    
+
     .course-type-container h2 {
         font-size: 1.5rem;
     }
-    
+
     .course-type-container li {
         flex-direction: column;
         gap: var(--space-3);
         align-items: stretch;
     }
-    
+
     .course-type-container li input {
         width: 100%;
         margin-right: 0;
     }
-    
+
     .course-type-container li div {
         justify-content: center;
     }
@@ -200,6 +197,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

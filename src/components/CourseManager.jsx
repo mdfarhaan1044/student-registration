@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useCourseContext } from "../context/CourseContext";
 import "./Styles/courseManager.css";
+import { GraduationCap } from "lucide-react";
 
 const CourseManager = () => {
   const { courses, addCourse, updateCourse, deleteCourse } = useCourseContext();
@@ -35,7 +36,7 @@ const CourseManager = () => {
 
   return (
     <div className="course-manager-container">
-      <h2>Course Manager</h2>
+      <h2> <GraduationCap size={25} /> Course Manager</h2>
       <input
         value={newCourse}
         onChange={(e) => setNewCourse(e.target.value)}
